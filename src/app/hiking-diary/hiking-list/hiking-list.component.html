@@ -1,0 +1,19 @@
+<p>hiking-list works!</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row pad-left-right">
+        <span class="pull-left title">Hikes</span>
+        <a class="btn btn-success pull-right" [routerLink]="['new']">Add Document</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="center-panel">
+        <app-hiking-item
+        *ngFor="let hike of hikes"
+                      [hike]="hike">
+        </app-hiking-item>
+      </div>
+    </div>
+  
+  </div>
+  
