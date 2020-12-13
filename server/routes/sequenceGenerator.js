@@ -1,5 +1,5 @@
 var Sequence = require('../models/sequence');
-
+const mongoose = require('mongoose');
 var maxHikeId;
 
 var sequenceId = null;
@@ -14,7 +14,7 @@ function SequenceGenerator() {
           error: err
         });
       }
-
+      
       sequenceId = sequence._id;
       maxHikeId = sequence.maxHikeId;
     });

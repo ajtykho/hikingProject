@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 module.exports = router; 
 
-const Hike = require('../models/hikes');
+const Hike = require('../models/hike');
 const sequenceGenerator = require('./sequenceGenerator');
 
 function returnError(res, error) {
@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
         res
         .status(200)
         .json({
-            message: 'Documents fetched successfully',
+            message: 'Hikes fetched successfully',
             hikes: hikes
         });
     })
@@ -56,11 +56,11 @@ router.post('/', (req, res, next) => {
  });
 
  router.put('/:id', (req, res, next) => {
-   Document.findOne({ id: req.params.id })
+   Hike.findOne({ id: req.params.id })
      .then(hike => {
        hike.name = req.body.name;
        hike.description = req.body.description;
-       hike.url = req.body.imageUrl;
+       hike.imageUrl = req.body.imageUrl;
  
        Hike.updateOne({ id: req.params.id }, hike)
          .then(result => {

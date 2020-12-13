@@ -25,6 +25,7 @@ export class HikingDetailComponent implements OnInit {
       (params: Params) => {
         this.id = params.id;
         this.hike = this.hikeService.getHike(this.id);
+        console.log(this.hike);
       }
     );
 
@@ -33,10 +34,13 @@ export class HikingDetailComponent implements OnInit {
 
   onDelete() {
     this.hikeService.deleteHike(this.hike);
-    this.router.navigateByUrl('/hikess');
+    this.router.navigateByUrl('/hikes');
  }
 
  onView() {
+   if (this.hike.description) {
+     console.log(this.hike.description);
+   }
    if (this.hike.imageUrl) {
      this.nativeWindow.open(this.hike.imageUrl);
    }

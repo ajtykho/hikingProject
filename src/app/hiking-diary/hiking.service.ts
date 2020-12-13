@@ -17,10 +17,10 @@ export class HikingService {
   }
 
   getHikes() {
-    this.http.get('http://localhost:3000/hikes')
+    this.http.get<{message: string, hikes: Hike[]}>('http://localhost:3000/hikes')
     .subscribe(
-      (hikes: Hike[]) => {
-        this.hikes = hikes;
+      (data) => {
+        this.hikes = data.hikes;
 
         this.maxHikeId = this.getMaxId();
 
@@ -121,6 +121,20 @@ deleteHike(hike: Hike) {
   if (pos < 0) {
     return;
   }
+
+  if (pos < 0) {
+    return;
+  }
+
+  // delete from database
+  this.http.delete('http://localhost:3000/hikes/' + hike.id)
+    .subscribe(
+      (response: Response) => {
+        this.hikes.splice(pos, 1);
+        this.hikes.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.HikeListChangedEvent.next(this.hikes.slice());
+      }
+    );
 }
 
 storeHikes() {
